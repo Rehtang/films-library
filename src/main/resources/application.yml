@@ -1,4 +1,6 @@
 spring:
   main:
     banner-mode: off
+filmsApi:
+  url: "http://www.omdbapi.com/?i=tt3896198&apikey=a51f3624"
 
