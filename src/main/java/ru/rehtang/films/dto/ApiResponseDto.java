@@ -1,5 +1,6 @@
 package ru.rehtang.films.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor()
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponseDto {
   @JsonProperty("Title")
   private String title;
@@ -56,7 +57,6 @@ public class ApiResponseDto {
   private String posterUrl;
 
   @JsonProperty("Ratings")
-
   private List<RatingsDto> ratings;
 
   @JsonProperty("Metascore")
@@ -82,5 +82,5 @@ public class ApiResponseDto {
   private String website;
 
   @JsonProperty("Response")
-  private String response;
+  private Boolean response;
  }

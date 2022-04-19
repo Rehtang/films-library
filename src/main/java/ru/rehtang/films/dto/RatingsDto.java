@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RatingsDto {
-    @JsonProperty("Source")
-    private String source;
+  @JsonProperty("Source")
+  private String source;
 
-    @JsonProperty("Value")
-    private String value;
+  @JsonProperty("Value")
+  private String value;
 }
