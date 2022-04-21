@@ -1,8 +1,5 @@
 package ru.rehtang.films.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +11,8 @@ import ru.rehtang.films.mapper.FilmMapper;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Data
 public class FilmsProviderService {
+
   private final FilmsFeignClient client;
   private final FilmMapper mapper;
 

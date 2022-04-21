@@ -6,12 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
-@NoArgsConstructor()
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponseDto {
   @JsonProperty("Title")
@@ -21,7 +20,7 @@ public class ApiResponseDto {
   private String year;
 
   @JsonProperty("Rated")
-  private String ageRate;
+  private String ageRate; // TODO
 
   @JsonProperty("Released")
   private String releaseYear;
