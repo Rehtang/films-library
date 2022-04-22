@@ -15,11 +15,13 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class FilmMapper {
 
+  @Mapping(target = "ageRate", source = "dto.ageRate")
+  @Mapping(target ="awards", source = "dto.awards")
   @Mapping(target = "ratings", expression = "java(toEntities(dto))")
   public abstract Film toEntity(ApiResponseDto dto);
 
   @Mapping(target = "id", ignore = true)
-  @Mapping(target = "film_id", source = "film.imdbID")
+  @Mapping(target = "filmId", source = "film.imdbID")
   @Mapping(target = "source", source = "dto.source")
   @Mapping(target = "value", source = "dto.value")
   public abstract FilmRating toEntity(RatingsDto dto, ApiResponseDto film);

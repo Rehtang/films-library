@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,6 +19,9 @@ public class Film {
 
   @Column(name = "year_of_release")
   private String year;
+
+  @Column(name = "rated")
+  private String ageRate;
 
   @Column(name = "released")
   private String releaseYear;
@@ -47,6 +50,9 @@ public class Film {
   @Column(name = "country")
   private String country;
 
+  @Column(name = "award")
+  private String awards;
+
   @Column(name = "poster")
   private String posterUrl;
 
@@ -70,7 +76,7 @@ public class Film {
   private String dvd;
 
   @Column(name = "box_office")
-  private Double boxOffice;
+  private String boxOffice;
 
   @Column(name = "production")
   private String production;
