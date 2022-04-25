@@ -1,4 +1,25 @@
 spring:
   main:
     banner-mode: off
+  datasource:
+    url: jdbc:postgresql://localhost:5432/userbd?currentSchema=public
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
 
+filmsApi:
+  feign:
+    apiKey: "a51f3624"
+    url: "http://www.omdbapi.com/"
+
+feign:
+  compression:
+    response:
+      enabled: true
+      useGzipDecoder: true
