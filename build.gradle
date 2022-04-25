@@ -32,6 +32,7 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 dependencyManagement {
 	imports {

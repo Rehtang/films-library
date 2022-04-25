@@ -25,4 +25,8 @@ public class FilmRating {
 
   @Column(name = "value")
   private String value;
+
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "film_id", insertable = false,updatable = false)
+  private Film film;
 }

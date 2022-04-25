@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public abstract class FilmMapper {
 
   @Mapping(target = "ageRate", source = "dto.ageRate")
-  @Mapping(target ="awards", source = "dto.awards")
+  @Mapping(target = "awards", source = "dto.awards")
   @Mapping(target = "ratings", expression = "java(toEntities(dto))")
   public abstract Film toEntity(ApiResponseDto dto);
 

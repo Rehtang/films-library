@@ -24,22 +24,14 @@ public class FilmsProviderService {
 
   public ApiResponseDto receiveFilms(String iMdbId, String plot) {
     var res = client.receiveFilms(iMdbId, plot, filmApiKey);
-    log.info("{}", res);
+//    log.info("{}", res);
     var rese = mapper.toEntity(res);
     System.out.println(mapper.toEntity(res));
-    deleteById(iMdbId);
     save(rese);
     return res;
   }
 
   public void save(Film film) {
     filmRepository.save(film);
-  }
-
-  public void deleteById(String id) {
-    filmRepository.deleteById(id);
-  }
-  public void saveAndFlush(Film film){
-    filmRepository.saveAndFlush(film);
   }
 }

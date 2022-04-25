@@ -7,12 +7,16 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "film")
 public class Film {
+
+  @Id
+  @Column(name = "imdb_id")
+  private String imdbID;
 
   @Column(name = "title")
   private String title;
@@ -65,10 +69,6 @@ public class Film {
   @Column(name = "imdb_vote")
   private String imdbVotes;
 
-  @Id
-  @Column(name = "imdb_id")
-  private String imdbID;
-
   @Column(name = "type")
   private String type;
 
@@ -87,7 +87,6 @@ public class Film {
   @Column(name = "response")
   private Boolean response;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "film_id")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
   private List<FilmRating> ratings;
 }
