@@ -1,5 +1,5 @@
 package ru.rehtang.films.mapper;
-
+//Rehtang
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.util.CollectionUtils;
