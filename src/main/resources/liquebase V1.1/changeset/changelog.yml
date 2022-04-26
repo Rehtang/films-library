@@ -1,0 +1,25 @@
+databaseChangelog:
+  - changeSet:
+      id: 20220423-01
+      author: daniltc23@gmail.com
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: 20220423-01-init_main_tables.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 20220423-02
+      author: daniltc23@gmail.com
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: 20220423-02-init_additional.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 20220423-03
+      author: daniltc23@gmail.com
+      changes:
+        - csvFile:
+            encoding: utf8
+            path: 20220423-03-movie_warmup.csv
+            relativeToChangelogFile: true
