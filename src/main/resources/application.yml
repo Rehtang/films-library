@@ -17,7 +17,6 @@ filmsApi:
   feign:
     apiKey: "a51f3624"
     url: "http://www.omdbapi.com/"
-
 feign:
   compression:
     response:
