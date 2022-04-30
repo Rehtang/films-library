@@ -1,8 +1,5 @@
 package ru.rehtang.films.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import lombok.*;
 import org.hibernate.Hibernate;
 
