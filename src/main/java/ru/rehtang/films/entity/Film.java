@@ -1,13 +1,16 @@
 package ru.rehtang.films.entity;
-//Rehtang
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -87,6 +90,38 @@ public class Film {
   @Column(name = "response")
   private Boolean response;
 
+  @Column(name = "is_watched")
+  private Boolean isWatched;
+
+  @ToString.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
   private List<FilmRating> ratings;
+
+  @ToString.Exclude
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "favouriteFilms")
+  private List<User> users;
+
+  public void addUserToFilm(User user) {
+    if (users == null) {
+      users = new ArrayList<>();
+    }
+    users.add(user);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+      return false;
+    }
+    Film film = (Film) o;
+    return getImdbID() != null && Objects.equals(getImdbID(), film.getImdbID());
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
 }

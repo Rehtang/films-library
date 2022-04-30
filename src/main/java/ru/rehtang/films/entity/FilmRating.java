@@ -1,12 +1,14 @@
 package ru.rehtang.films.entity;
-//Rehtang
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -27,6 +29,23 @@ public class FilmRating {
   private String value;
 
   @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "film_id", insertable = false,updatable = false)
+  @JoinColumn(name = "film_id", insertable = false, updatable = false)
   private Film film;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+      return false;
+    }
+    Film film = (Film) o;
+    return getId() != null && Objects.equals(getId(), film.getImdbID());
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
 }
