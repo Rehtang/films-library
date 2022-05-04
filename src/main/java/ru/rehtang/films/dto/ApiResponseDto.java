@@ -1,5 +1,5 @@
 package ru.rehtang.films.dto;
-//Rehtang
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class ApiResponseDto {
   private String year;
 
   @JsonProperty("Rated")
-  private String ageRate; // TODO
+  private String ageRate;
 
   @JsonProperty("Released")
   private String releaseYear;
