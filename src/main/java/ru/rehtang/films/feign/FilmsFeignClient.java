@@ -19,9 +19,10 @@ public interface FilmsFeignClient {
 
   @GetMapping("/")
   ApiSearchResponse receiveFilmByTitle(
-      @RequestParam("s") String title,
-      @RequestParam("type") FilmType type,
-      @RequestParam("y") String year,
-      @RequestParam("page") Integer page,
-      @RequestParam("apikey") String apiKey);
+          @RequestParam("s") String title,
+          @RequestParam("type") FilmType type,
+          @RequestParam("y") String year,
+          @RequestParam("page") Integer page,
+          @RequestParam("apikey") String apiKey
+  );
 }

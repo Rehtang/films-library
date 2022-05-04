@@ -1,5 +1,8 @@
 package ru.rehtang.films.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -90,10 +93,6 @@ public class Film {
   @Column(name = "response")
   private Boolean response;
 
-  @Column(name = "is_watched")
-  private Boolean isWatched;
-
-  @ToString.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
   private List<FilmRating> ratings;
 
