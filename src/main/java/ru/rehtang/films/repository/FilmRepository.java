@@ -16,5 +16,4 @@ public interface FilmRepository extends JpaRepository<Film, String> {
 
   List<Film> findAllByYearGreaterThanEqual(String year);
 
-  List<Film> findAllByIsWatchedEquals(Boolean watched);
 }

@@ -83,5 +83,4 @@ public class ApiResponseDto {
   @JsonProperty("Response")
   private Boolean response;
 
-  private Boolean isWatched;
  }
