@@ -25,4 +25,36 @@ public class FilmsRestController {
   public List<ApiResponseDto> getFilmsByTitle(@RequestParam String title) {
     return service.receiveFilmsByTitle(title, null, null, null);
   }
+
+  @GetMapping(value = "/baseSearch/yearEqual", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<ApiResponseDto> getFilmsByYear(@RequestParam String year) {
+    return service.findFilmByYear(year);
+  }
+
+  @GetMapping(
+      value = "/baseSearch/yearGreaterThanEqual",
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<ApiResponseDto> getFilmsByYearGreaterThanEqual(@RequestParam String year) {
+    return service.findFilmByYearGreaterThanEqual(year);
+  }
+
+  @GetMapping(value = "/baseSearch/yearLessThanEqual", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<ApiResponseDto> getFilmsByYearLessThanEqual(@RequestParam String year) {
+    return service.findFilmByYearLessThanEqual(year);
+  }
+
+  @GetMapping(value = "/user/new")
+  public void createUser(@RequestParam String username, @RequestParam String password) {
+    service.createUser(username, password);
+  }
+
+  @GetMapping(value = "/user/addToWatched")
+  public void addToWatched(@RequestParam String username, @RequestParam String film_id) {
+    service.addToWatched(username, film_id);
+  }
+
+  @GetMapping(value = "/user/getWatchlist")
+  public List<ApiResponseDto> getWatchlist(@RequestParam String username) {
+    return service.findWatchListByUsername(username);
+  }
 }

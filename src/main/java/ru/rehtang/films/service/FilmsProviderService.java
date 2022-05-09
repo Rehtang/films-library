@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import ru.rehtang.films.dto.ApiResponseDto;
 import ru.rehtang.films.dto.FilmType;
+import ru.rehtang.films.entity.User;
 import ru.rehtang.films.feign.FilmsFeignClient;
 import ru.rehtang.films.mapper.FilmMapper;
 import ru.rehtang.films.repository.FilmRepository;
+import ru.rehtang.films.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ public class FilmsProviderService {
   private final FilmsFeignClient client;
   private final FilmMapper mapper;
   private final FilmRepository filmRepository;
+  private final UserRepository userRepository;
 
   @Value("${filmsApi.feign.apiKey}")
   private String filmApiKey;
@@ -55,5 +58,44 @@ public class FilmsProviderService {
               return fromApi;
             })
         .collect(Collectors.toList());
+  }
+
+  public List<ApiResponseDto> findFilmByYear(String year) {
+    var filmInBase = filmRepository.findAllByYear(year);
+
+    return filmInBase.stream().map(mapper::toDto).collect(Collectors.toList());
+  }
+
+  public List<ApiResponseDto> findFilmByYearGreaterThanEqual(String year) {
+    var filmInBase = filmRepository.findAllByYearGreaterThanEqual(year);
+
+    return filmInBase.stream().map(mapper::toDto).collect(Collectors.toList());
+  }
+
+  public List<ApiResponseDto> findFilmByYearLessThanEqual(String year) {
+    var filmInBase = filmRepository.findAllByYearLessThanEqual(year);
+
+    return filmInBase.stream().map(mapper::toDto).collect(Collectors.toList());
+  }
+
+  public void createUser(String username, String password) {
+    var userInBase = new User();
+    userInBase.setUsername(username);
+    userInBase.setPassword(password);
+    userRepository.save(userInBase);
+  }
+
+  public void addToWatched(String username, String film_id) {
+    var userInBase = userRepository.findUserByUsername(username);
+    var filmInBase = filmRepository.findById(film_id);
+    filmInBase.get().addUserToFilm(userInBase);
+    userInBase.addFilmToUser(filmInBase.get());
+    userRepository.save(userInBase);
+  }
+
+  public List<ApiResponseDto> findWatchListByUsername(String username) {
+    var userInBase = userRepository.findUserByUsername(username);
+    return userInBase.getFavouriteFilms().stream().map(mapper::toDto).collect(Collectors.toList());
+
   }
 }
