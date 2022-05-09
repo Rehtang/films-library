@@ -96,5 +96,6 @@ public class FilmsProviderService {
   public List<ApiResponseDto> findWatchListByUsername(String username) {
     var userInBase = userRepository.findUserByUsername(username);
     return userInBase.getFavouriteFilms().stream().map(mapper::toDto).collect(Collectors.toList());
+
   }
 }
