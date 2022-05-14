@@ -5,8 +5,8 @@ import org.mapstruct.Mapping;
 import org.springframework.util.CollectionUtils;
 import ru.rehtang.films.dto.ApiResponseDto;
 import ru.rehtang.films.dto.RatingsDto;
-import ru.rehtang.films.entity.Film;
-import ru.rehtang.films.entity.FilmRating;
+import ru.rehtang.films.persistence.entity.Film;
+import ru.rehtang.films.persistence.entity.FilmRating;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class FilmMapper {
 
+  @Mapping(target = "users", ignore = true)
   @Mapping(target = "ageRate", source = "dto.ageRate")
   @Mapping(target = "awards", source = "dto.awards")
   @Mapping(target = "ratings", expression = "java(toEntities(dto))")
