@@ -27,3 +27,4 @@ jwt:
   header: Authorization
   secret: ZmlsbQ==
   expirationMills: 900000 # 15 min
+
