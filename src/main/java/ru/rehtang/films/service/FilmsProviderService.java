@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import ru.rehtang.films.dto.ApiResponseDto;
 import ru.rehtang.films.dto.FilmType;
-import ru.rehtang.films.entity.User;
 import ru.rehtang.films.feign.FilmsFeignClient;
 import ru.rehtang.films.mapper.FilmMapper;
-import ru.rehtang.films.repository.FilmRepository;
-import ru.rehtang.films.repository.UserRepository;
+import ru.rehtang.films.persistence.entity.Film;
+import ru.rehtang.films.persistence.repository.FilmRepository;
+import ru.rehtang.films.persistence.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,24 +78,36 @@ public class FilmsProviderService {
     return filmInBase.stream().map(mapper::toDto).collect(Collectors.toList());
   }
 
-  public void createUser(String username, String password) {
-    var userInBase = new User();
-    userInBase.setUsername(username);
-    userInBase.setPassword(password);
-    userRepository.save(userInBase);
+  public Film findById(String id) {
+    return filmRepository
+        .findById(id)
+        .orElseThrow(
+            () ->
+                new RuntimeException(
+                    String.format("There is no film with ID = %s in Database", id)));
   }
 
-  public void addToWatched(String username, String film_id) {
+  public void deleteById(String id) {
+    var entity = findById(id);
+    filmRepository.delete(entity);
+  }
+
+  public void addToFavourite(String username, String film_id) {
     var userInBase = userRepository.findUserByUsername(username);
     var filmInBase = filmRepository.findById(film_id);
-    filmInBase.get().addUserToFilm(userInBase);
-    userInBase.addFilmToUser(filmInBase.get());
-    userRepository.save(userInBase);
+    filmInBase.get().addUserToFilm(userInBase.get());
+    userInBase.get().addToFavourite(filmInBase.get());
+    userRepository.save(userInBase.get());
+  }
+
+  public void save(Film film) {
+    filmRepository.save(film);
   }
 
   public List<ApiResponseDto> findWatchListByUsername(String username) {
     var userInBase = userRepository.findUserByUsername(username);
-    return userInBase.getFavouriteFilms().stream().map(mapper::toDto).collect(Collectors.toList());
-
+    return userInBase.get().getFavouriteFilms().stream()
+        .map(mapper::toDto)
+        .collect(Collectors.toList());
   }
 }

@@ -1,8 +1,8 @@
-package ru.rehtang.films.repository;
+package ru.rehtang.films.persistence.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.rehtang.films.entity.Film;
+import ru.rehtang.films.persistence.entity.Film;
 
 import java.util.List;
 
@@ -15,5 +15,4 @@ public interface FilmRepository extends JpaRepository<Film, String> {
   List<Film> findAllByYearLessThanEqual(String year);
 
   List<Film> findAllByYearGreaterThanEqual(String year);
-
 }

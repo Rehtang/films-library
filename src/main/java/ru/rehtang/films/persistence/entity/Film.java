@@ -1,8 +1,8 @@
-package ru.rehtang.films.entity;
+package ru.rehtang.films.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
-
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -91,18 +91,21 @@ public class Film {
   @Column(name = "response")
   private Boolean response;
 
+  @ToString.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
   private List<FilmRating> ratings;
 
+  @JsonBackReference
   @ToString.Exclude
   @ManyToMany(fetch = FetchType.EAGER, mappedBy = "favouriteFilms")
   private List<User> users;
 
-  public void addUserToFilm(User user) {
+  public Film addUserToFilm(User user) {
     if (users == null) {
       users = new ArrayList<>();
     }
     users.add(user);
+    return this;
   }
 
   @Override
@@ -114,7 +117,7 @@ public class Film {
       return false;
     }
     Film film = (Film) o;
-    return getImdbID() != null && Objects.equals(getImdbID(), film.getImdbID());
+    return imdbID != null && Objects.equals(imdbID, film.imdbID);
   }
 
   @Override

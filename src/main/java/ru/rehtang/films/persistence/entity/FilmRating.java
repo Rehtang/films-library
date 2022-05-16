@@ -1,7 +1,9 @@
-package ru.rehtang.films.entity;
+package ru.rehtang.films.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -27,6 +29,8 @@ public class FilmRating {
   @Column(name = "value")
   private String value;
 
+  @JsonBackReference
+  @ToString.Exclude
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "film_id", insertable = false, updatable = false)
   private Film film;
@@ -39,8 +43,8 @@ public class FilmRating {
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
       return false;
     }
-    Film film = (Film) o;
-    return getId() != null && Objects.equals(getId(), film.getImdbID());
+    FilmRating that = (FilmRating) o;
+    return id != null && Objects.equals(id, that.id);
   }
 
   @Override
