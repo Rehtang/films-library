@@ -23,3 +23,27 @@ databaseChangelog:
             encoding: utf8
             path: 20220423-03-movie_warmup.csv
             relativeToChangelogFile: true
+  - changeSet:
+      id: 20220509-04
+      author: daniltc23@gmail.com
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: 20220509-04-init_user_and_watch_tables.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 20220513-05
+      author: daniltc23@gmail.com
+      loadDara:
+        columns:
+          - column:
+              header: film_id
+              name: film_id
+              type: STRING
+        encoding: utf8
+        tableName: film_receive
+        primaryKey: pk_film_id
+        file: 20220423-03-movie_warmup.csv
+        separator: ','
+        quotchar: ''''
+        relativeToChangelogFile: true
