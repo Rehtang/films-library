@@ -15,3 +15,15 @@ connects to imdb-API and let user to search films with tags, add to favourite an
 Все настройки вынесены в файл Application.yml
 
 Все таблицы создаются через LiqueBase. Также есть прогрев БД. В папке liquebase V1.1 есть файл с расширением .csv. Он содержит список IMDB ID, который сразу заносится в базу.
+
+### Stack:
+```
+Java 11
+Spring Boot 2
+Spring Cloud Netflix: Feign Clients
+Spring Data JPA (Hibernate)
+Spring Security
+PostgreSQL
+Liquibase
+Gradle 
+```
